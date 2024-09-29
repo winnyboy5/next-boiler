@@ -1,3 +1,5 @@
+import AppNavbar from "@/components/app-navbar";
+import Providers from "@/components/providers";
 import type { Metadata } from "next";
 import "./globals.scss";
 
@@ -20,7 +22,10 @@ export default function RootLayout({
         />
       </head>
       <body>
-        {children}
+        <Providers>
+          <AppNavbar />
+            {children}
+        </Providers>
       </body>
     </html>
   );
