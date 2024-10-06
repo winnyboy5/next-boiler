@@ -8,9 +8,9 @@ import React from 'react';
 function providers({ children }: { children: React.ReactNode }) {
   const router = useRouter();
   return (
-    <NextUIProvider navigate={router.push}>
+    <NextUIProvider navigate={router.push} className='w-full h-full flex flex-col'>
       <NextThemesProvider attribute="class">
-        {children}
+          {children}
       </NextThemesProvider>
     </NextUIProvider>
   )
