@@ -1,6 +1,6 @@
 # Next Boiler
 
-This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app), designed as a starting point for building SaaS (Software as a Service) applications.
+This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app), designed as a boilerplate starter application.
 
 ## Features
 
