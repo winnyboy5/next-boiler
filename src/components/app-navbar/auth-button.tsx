@@ -12,16 +12,18 @@ import {
 import { IconBrandGoogleFilled } from "@tabler/icons-react";
 import { signIn, signOut, useSession } from "next-auth/react";
 
-function AuthButton({ minimal = true }: {minimal?: boolean}) {
+function AuthButton({ minimal = true }: { minimal?: boolean }) {
   const { data, status } = useSession();
   if (status === "loading") {
     return <CircularProgress aria-label="Loading Authentication" />;
   }
 
   if (status === "authenticated") {
+    const signOutClick = () => signOut({ callbackUrl: '/' });
+
     if (minimal) {
       return (
-        <Button onClick={() => signOut()} color="danger">
+        <Button onClick={signOutClick} color="danger">
           <IconBrandGoogleFilled />
           Sign Out
         </Button>
@@ -43,7 +45,7 @@ function AuthButton({ minimal = true }: {minimal?: boolean}) {
               <p className="font-semibold">Signed in as</p>
               <p className="font-semibold">{data.user?.email}</p>
             </DropdownItem>
-            <DropdownItem key="logout" color="danger"  onClick={() => signOut()} >
+            <DropdownItem key="logout" color="danger" onClick={signOutClick} >
               Log Out
             </DropdownItem>
           </DropdownMenu>
@@ -53,7 +55,7 @@ function AuthButton({ minimal = true }: {minimal?: boolean}) {
   }
 
   return (
-    <Button onClick={() => signIn("google")} color="danger">
+    <Button onClick={() => signIn("google", { callbackUrl: '/profile' })} color="danger">
       <IconBrandGoogleFilled />
       Sign In
     </Button>

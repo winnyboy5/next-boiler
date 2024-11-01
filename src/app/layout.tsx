@@ -2,6 +2,7 @@ import AppNavbar from "@/components/app-navbar";
 import Providers from "@/components/providers";
 import type { Metadata } from "next";
 import "./globals.scss";
+import { Suspense } from "react";
 
 export const metadata: Metadata = {
   title: "Create Next App",
@@ -25,7 +26,9 @@ export default function RootLayout({
         <Providers>
           <AppNavbar />
           <main className="flex-grow bg-[url(/light-bg.webp)] bg-cover bg-repeat overflow-auto dark:bg-[url(/dark-bg.webp)]">
-            {children}
+            <Suspense>
+              {children}
+            </Suspense>
           </main>
         </Providers>
       </body>
