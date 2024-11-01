@@ -1,22 +1,29 @@
 "use client";
 import { Link, Navbar, NavbarBrand, NavbarContent, NavbarItem, NavbarMenu, NavbarMenuItem, NavbarMenuToggle } from "@nextui-org/react";
 import { IconStorm } from "@tabler/icons-react";
+import { useSession } from "next-auth/react";
 import React from "react";
+import AuthButton from "./auth-button";
 import { ThemeSwitcher } from "./theme-switcher";
 
 export default function AppNavbar() {
   const [isMenuOpen, setIsMenuOpen] = React.useState(false);
+  const { status } = useSession();
 
-  const menuItems: any[] = [
+  let menuItems: { label: string, href: string }[] = [
     {
       label: "Home",
       href: "/",
-    },
-    {
+    }
+  ];
+
+  if (status === 'authenticated') {
+    const authenticatedMenus =  [{
       label: "Profile",
       href: "/profile",
-    },
-  ];
+    }];
+    menuItems = [...menuItems, ...authenticatedMenus];
+  }
 
   return (
     <Navbar onMenuOpenChange={setIsMenuOpen}>
@@ -46,6 +53,9 @@ export default function AppNavbar() {
         <NavbarItem>
           <ThemeSwitcher />
         </NavbarItem>
+        <NavbarItem>
+          <AuthButton minimal={false} />
+        </NavbarItem>
       </NavbarContent>
 
       <NavbarMenu>
@@ -63,6 +73,9 @@ export default function AppNavbar() {
             </Link>
           </NavbarMenuItem>
         ))}
+        <NavbarItem>
+          <AuthButton />
+        </NavbarItem>
       </NavbarMenu>
     </Navbar>
   );
